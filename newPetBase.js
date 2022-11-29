@@ -128,6 +128,7 @@ const renderData = () => {
 //CASEY BUTTON
 caseyButton.addEventListener("click", () => {
 petPic.src = "./images/ferret_1.png"
+a2.src = "./Images/tamagochi_A2_casey.png";
     chosenName = petArray[0]
     CaseyPet.addCasey();// new code
     console.log(chosenName)
@@ -137,6 +138,7 @@ petPic.src = "./images/ferret_1.png"
 //MATTHEW BUTTON
 matthewButton.addEventListener("click", () => {
     chosenName = petArray[1]
+    a2.src = "./Images/tamagochi_A2_matthew.png";
     MatthewPet.addMatthew(); // Casey's code!!!! Yay!
     console.log(chosenName)
     renderData();

@@ -8,6 +8,21 @@ let chosenName
 //Picture
 const petPic = document.getElementById("myPetPic")
 
+//CONSOLE IMAGE
+const a1 = document.getElementById("a1");
+const a2 = document.getElementById("a2");
+const a3 = document.getElementById("a3");
+
+const b1 = document.getElementById("b1");
+const b2 = document.getElementById("b2");
+const b3 = document.getElementById("b3");
+
+const c1 = document.getElementById("c1");
+const c2 = document.getElementById("c2");
+const c3 = document.getElementById("c3");
+
+
+
 //choice buttons
 const caseyButton = document.getElementById("casey");
 const matthewButton = document.getElementById("matthew")
@@ -27,6 +42,18 @@ const number4 = document.getElementById("number-4")
 //BUTTONS
 const play = document.getElementById("play")
 
+//Console Images
+a1.src = "./Images/tamagochi_A1.png";
+a2.src = "./Images/tamagochi_A2.png";
+a3.src = "./Images/tamagochi_A3.png";
+
+b1.src = "./Images/tamagochi_B1.png";
+b2.src = "./Images/tamagochi_B2.png";
+b3.src = "./Images/tamagochi_B3.png";
+
+c1.src = "./Images/tamagochi_C1.png";
+c2.src = "./Images/tamagochi_C2.png";
+c3.src = "./Images/tamagochi_C3.png";
 
 class Cyberpet {
     constructor(type, name, age, happiness, cleanliness, hunger) {

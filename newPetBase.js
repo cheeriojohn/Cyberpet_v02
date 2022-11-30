@@ -41,6 +41,7 @@ const number4 = document.getElementById("number-4")
 
 //BUTTONS
 const play = document.getElementById("play")
+const feed = document.getElementById("feed")
 
 //Console Images
 a1.src = "./Images/tamagochi_A1.png";
@@ -88,6 +89,13 @@ class FerretPet extends Cyberpet {
     }
     extra1() {
         petPic.src = "./images/ferret.wriggle.gif"
+    }
+    giveFood() {
+  // con
+  this.hunger -= 40;
+  this.cleanliness -= 40;
+  // pro
+  this.happiness += 50;
     }
     }
 
@@ -145,6 +153,14 @@ matthewButton.addEventListener("click", () => {
 })
 
 //Interaction buttons
+feed.addEventListener("click", () => {
+    chosenName.giveFood();
+    // checkCondition();
+    flag = true;
+    renderData();
+})
+
+
 play.addEventListener("click", () => {
     chosenName.extra1();
 })

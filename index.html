@@ -12,27 +12,27 @@
 <body>
     <div id="main-container">
         <div id="choice-buttons">
-            <button id="casey" class="pulse" >Casey</button>
-            <button id="matthew" class ="pulse" >Matthew</button>
-            <button id="adam" class="pulse" >Adam</button>
-            <button id="nick" class="pulse" >Nick</button>
-            <button id="shina" class="pulse" >Shina</button>
+            <button id="casey" class="pulse">Casey</button>
+            <button id="matthew" class="pulse">Matthew</button>
+            <button id="adam" class="pulse">Adam</button>
+            <button id="nick" class="pulse">Nick</button>
+            <button id="shina" class="pulse">Shina</button>
         </div>
 
         <div id="main-board">
-            <div id="creature">
+            <!-- <div id="creature">
                 <p id="type">example</p>
                 <p id="my-new-name">example</p>
                 <p id="age">example</p>
                 <p id="happiness">example</p>
                 <p id="cleanliness">example</p>
                 <p id="hunger">example</p>
-                <p id="number-4">Number 4</p><!-- unique to each pet -->
-                <p id="number-5">Number 5</p><!-- unique to each pet -->
+                <p id="number-4">Number 4</p>unique to each pet
+                <p id="number-5">Number 5</p>unique to each pet
 
-            </div>
+            </div> -->
             <!-- END OF THE PET'S DETAILS AND SCORES   -->
-
+            <div id="left-side"></div>
             <!-- CONSOLE START -->
             <div id="image-container">
                 <div id="console">
@@ -43,7 +43,22 @@
                     </div>
                     <div id="console-middle">
                         <img id="b1" src="" alt="nothing here">
-                        <img id="b2" src="" alt="nothing here">
+                        <div id="screen" style="background-image: url('./Images/console/72ppi/tamagochi_B2.png')">
+                            <!-- START OF THE PET'S DETAILS AND SCORES   -->
+                            <div id="stats">
+                                <p id="type" class="my-text">type</p>
+                                <p id="my-new-name" class="my-text">name</p>
+                                <p id="age" class="my-text">age</p>
+                                <p id="happiness" class="my-text">happiness</p>
+                                <p id="cleanliness" class="my-text">cleanliness</p>
+                                <p id="hunger" class="my-text">hunger level</p>
+                                <p id="thirst" class="my-text">thirst level</p>
+                                <p id="number-5" class="my-text">Number 5</p><!-- unique to each pet -->
+                                <p id="number-6" class="my-text">Number 6</p><!-- unique to each pet -->
+                            </div>
+                            <!-- END OF THE PET'S DETAILS AND SCORES   -->
+                        </div>
+                        <!-- <img id="b2" src="" alt="nothing here"> -->
                         <img id="b3" src="" alt="nothing here">
                     </div>
                     <div id="console-labels">
@@ -68,7 +83,7 @@
                 </div>
             </div>
             <!-- CONSOLE END -->
-
+            <div id="right-side"></div>
         </div>
     </div>
     <script src="newPetBase.js"></script>

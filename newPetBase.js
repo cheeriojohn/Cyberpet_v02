@@ -74,29 +74,29 @@ const stats = document.getElementById("stats")
 stats.style.display = 'none';
 
 //THE MAIN PCTURES FOR THE CONSOLE
-a1.src = "./Images/console/72ppi/tamagochi_A1.png";
-a2.src = "./Images/console/72ppi/tamagochi_A2.png"; //This one changes when the pet is chosen
-a3.src = "./Images/console/72ppi/tamagochi_A3.png";
+a1.src = "./Images/console/700pxh/tamagochi_A1.png";
+a2.src = "./Images/console/700pxh/tamagochi_A2.png"; //This one changes when the pet is chosen
+a3.src = "./Images/console/700pxh/tamagochi_A3.png";
 
-b1.src = "./Images/console/72ppi/tamagochi_B1.png";
-// b2.src = "./Images/console/72ppi/tamagochi_B2.png"; // This is where the pet pic appears
-b3.src = "./Images/console/72ppi/tamagochi_B3.png";
+b1.src = "./Images/console/700pxh/tamagochi_B1.png";
+// b2.src = "./Images/console/700pxh/tamagochi_B2.png"; // This is where the pet pic appears
+b3.src = "./Images/console/700pxh/tamagochi_B3.png";
 
-c1.src = "./Images/console/72ppi/tamagochi_C1.png";
-c2_munch.src = "./Images/console/72ppi/tamagochi_C2_munch_unlit.png";
-c3_slurp.src = "./Images/console/72ppi/tamagochi_C3_slurp_unlit.png";
-c4_extra1.src = "./Images/console/72ppi/tamagochi_C4_extra1_unlit.png";
-c5_extra2.src = "./Images/console/72ppi/tamagochi_C5_extra2_unlit.png";
-c6.src = "./Images/console/72ppi/tamagochi_C6.png";
+c1.src = "./Images/console/700pxh/tamagochi_C1.png";
+c2_munch.src = "./Images/console/700pxh/tamagochi_C2_munch_unlit.png";
+c3_slurp.src = "./Images/console/700pxh/tamagochi_C3_slurp_unlit.png";
+c4_extra1.src = "./Images/console/700pxh/tamagochi_C4_extra1_unlit.png";
+c5_extra2.src = "./Images/console/700pxh/tamagochi_C5_extra2_unlit.png";
+c6.src = "./Images/console/700pxh/tamagochi_C6.png";
 
-d1.src = "./Images/console/72ppi/tamagochi_D1.png";
-d2_button1.src = "./Images/console/72ppi/tamagochi_D2_button1_unlit.png";
-d3_button2.src = "./Images/console/72ppi/tamagochi_D3_button2_unlit.png";
-d4_button3.src = "./Images/console/72ppi/tamagochi_D4_button3_unlit.png";
-d5_button4.src = "./Images/console/72ppi/tamagochi_D5_button4_unlit.png";
-d6.src = "./Images/console/72ppi/tamagochi_D6.png";
+d1.src = "./Images/console/700pxh/tamagochi_D1.png";
+d2_button1.src = "./Images/console/700pxh/tamagochi_D2_button1_unlit.png";
+d3_button2.src = "./Images/console/700pxh/tamagochi_D3_button2_unlit.png";
+d4_button3.src = "./Images/console/700pxh/tamagochi_D4_button3_unlit.png";
+d5_button4.src = "./Images/console/700pxh/tamagochi_D5_button4_unlit.png";
+d6.src = "./Images/console/700pxh/tamagochi_D6.png";
 
-e1.src = "./Images/console/72ppi/tamagochi_E1.png";
+e1.src = "./Images/console/700pxh/tamagochi_E1.png";
 
 class Cyberpet {
     constructor(type, name, age, happiness, cleanliness, hunger, thirst) {
@@ -232,18 +232,18 @@ const renderData = () => {
     happiness.textContent = `happiness: ${chosenName.happiness}`;
     cleanliness.textContent = `cleanliness: ${chosenName.cleanliness}`
     hunger.textContent = `hunger: ${chosenName.hunger}`
-    thirst.textContent = `thirst: ${chosenName.hunger}`
+    thirst.textContent = `thirst: ${chosenName.thirst}`
     number5.textContent = `${scoreName5}: ${chosenName.score5}`;
     number6.textContent = `${scoreName6}: ${chosenName.score6}`;
 }
 
 //CASEY BUTTON
-// IMAGE SIZE FOR PICTURES IS 240px WIDE by 154px HIGH
+// IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 caseyButton.addEventListener("click", () => {
-    a2.src = "./Images/console/72ppi/tamagochi_A2_casey.png"; //Name on top of console
-    c4_extra1.src = "./images/console/72ppi/tamagochi_C4_wriggle_unlit.png";
-    c5_extra2.src = "./images/console/72ppi/tamagochi_C5_dig_unlit.png"
-    document.getElementById("screen").setAttribute('style', 'background-color:yellow');
+    a2.src = "./Images/console/700pxh/tamagochi_A2_casey.png"; //Name on top of console
+    c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_unlit.png";
+    c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_unlit.png"
+    document.getElementById("screen").setAttribute('style', 'background-color:black');
 
     // b2.src = "./images/ferret_1.png"
     chosenName = petArray[0]
@@ -251,14 +251,16 @@ caseyButton.addEventListener("click", () => {
     scoreName5 = 'wriggle';
     scoreName6 = 'dig';
     stats.style.display = 'block'; // SHOW THE STATS
+    type.style.color = 'red';
+    type.style.fontFamily = 'monospace'
     renderData();
 })
 
 //MATTHEW BUTTON
-// IMAGE SIZE FOR PICTURES IS 240px WIDE by 154px HIGH
+// IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 matthewButton.addEventListener("click", () => {
     chosenName = petArray[1]
-    a2.src = "./Images/console/72ppi/tamagochi_A2_matthew.png"; //Name on top 
+    a2.src = "./Images/console/700pxh/tamagochi_A2_matthew.png"; //Name on top 
     MatthewPet.addMatthew(); // Casey's code!!!! Yay!
     scoreName5 = 'panting'
     scoreName6 = 'dribbling'
@@ -267,10 +269,10 @@ matthewButton.addEventListener("click", () => {
 })
 
 //ADAM BUTTON
-// IMAGE SIZE FOR PICTURES IS 240px WIDE by 154px HIGH
+// IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 adamButton.addEventListener("click", () => {
     chosenName = petArray[2]
-    a2.src = "./Images/console/72ppi/tamagochi_A2_adam.png"; //Name on top 
+    a2.src = "./Images/console/700pxh/tamagochi_A2_adam.png"; //Name on top 
     AdamPet.addAdam(); // Casey's code!!!! Yay!
     scoreName5 = ''
     scoreName6 = ''
@@ -279,7 +281,7 @@ adamButton.addEventListener("click", () => {
 })
 
 //SHINA BUTTON
-// IMAGE SIZE FOR PICTURES IS 240px WIDE by 154px HIGH
+// IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 // shinaButton.addEventListener("click", () => {
 //     chosenName = petArray[3]
 //     // a2.src = ""; //Name on top 
@@ -291,13 +293,13 @@ adamButton.addEventListener("click", () => {
 // })
 
 // NICK BUTTON
-// IMAGE SIZE FOR PICTURES IS 240px WIDE by 154px HIGH
+// IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 nickButton.addEventListener("click", () => {
     chosenName = petArray[4]
-    a2.src = "./Images/console/72ppi/tamagochi_A2_nick.png"; //Name on top 
-    document.getElementById("screen").setAttribute('style', 'background-image:url("./images/console/72ppi/tamagochi_B2_nick1.png")');
-    c4_extra1.src = "./images/console/72ppi/tamagochi_C4_dive_unlit.png";
-    c5_extra2.src = "./images/console/72ppi/tamagochi_C5_ask_unlit.png";
+    a2.src = "./Images/console/700pxh/tamagochi_A2_nick.png"; //Name on top 
+    document.getElementById("screen").setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_nick1.png")');
+    c4_extra1.src = "./images/console/700pxh/tamagochi_C4_dive_unlit.png";
+    c5_extra2.src = "./images/console/700pxh/tamagochi_C5_ask_unlit.png";
     // paras.classList.add('my-new-text')
     NickPet.addNick(); // Casey's code!!!! Yay!
     scoreName5 = 'dive'
@@ -310,14 +312,14 @@ nickButton.addEventListener("click", () => {
 
 // MUNCH BUTTON
 d2_button1.addEventListener("mouseenter", () => {
-    c2_munch.src = "./images/console/72ppi/tamagochi_C2_munch_lit.png"
+    c2_munch.src = "./images/console/700pxh/tamagochi_C2_munch_lit.png"
 })
 d2_button1.addEventListener("mouseleave", () => {
-    c2_munch.src = "./images/console/72ppi/tamagochi_C2_munch_unlit.png"
-    d2_button1.src = "./images/console/72ppi/tamagochi_D2_button1_unlit.png"
+    c2_munch.src = "./images/console/700pxh/tamagochi_C2_munch_unlit.png"
+    d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_unlit.png"
 })
 d2_button1.addEventListener("click", () => {
-    d2_button1.src = "./images/console/72ppi/tamagochi_D2_button1_lit.png"
+    d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_lit.png"
 
     chosenName.giveFood();
     // checkCondition();
@@ -327,14 +329,14 @@ d2_button1.addEventListener("click", () => {
 
 //SLURP BUTTON
 d3_button2.addEventListener("mouseenter", () => {
-    c3_slurp.src = "./images/console/72ppi/tamagochi_C3_slurp_lit.png"
+    c3_slurp.src = "./images/console/700pxh/tamagochi_C3_slurp_lit.png"
 })
 d3_button2.addEventListener("mouseleave", () => {
-    c3_slurp.src = "./images/console/72ppi/tamagochi_C3_slurp_unlit.png"
-    d3_button2.src = "./images/console/72ppi/tamagochi_D3_button2_unlit.png"
+    c3_slurp.src = "./images/console/700pxh/tamagochi_C3_slurp_unlit.png"
+    d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_unlit.png"
 })
 d3_button2.addEventListener("click", () => {
-    d3_button2.src = "./images/console/72ppi/tamagochi_D3_button2_lit.png"
+    d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_lit.png"
     chosenName.giveDrink()
     renderData();
 })
@@ -342,28 +344,28 @@ d3_button2.addEventListener("click", () => {
 //EXTRA1 BUTTON - WE NEED TO USE IF/ELSE TO GIVE THE CORRECT MOUSEOVER PIX
 d4_button3.addEventListener("mouseenter", () => {
     if (chosenName == petArray[0]) {
-        c4_extra1.src = "./images/console/72ppi/tamagochi_C4_wriggle_lit.png"
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_lit.png"
     } else if (chosenName == petArray[4]) {
-        c4_extra1.src = "./images/console/72ppi/tamagochi_C4_dive_lit.png"
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_dive_lit.png"
     } else {
-        c4_extra1.src = "./images/console/72ppi/tamagochi_C4_extra1_lit.png"
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_extra1_lit.png"
     }
 })
 d4_button3.addEventListener("mouseleave", () => {
     if (chosenName == petArray[0]) {
-        c4_extra1.src = "./images/console/72ppi/tamagochi_C4_wriggle_unlit.png"
-        d4_button3.src = "./images/console/72ppi/tamagochi_D4_button3_unlit.png"
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_unlit.png"
+        d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
     } else if (chosenName == petArray[4]) {
-        c4_extra1.src = "./images/console/72ppi/tamagochi_C4_dive_unlit.png"
-        d4_button3.src = "./images/console/72ppi/tamagochi_D4_button3_unlit.png"
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_dive_unlit.png"
+        d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
     }
     else {
-        c4_extra1.src = "./images/console/72ppi/tamagochi_C4_extra1_unlit.png"
-        d4_button3.src = "./images/console/72ppi/tamagochi_D4_button3_unlit.png"
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_extra1_unlit.png"
+        d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
     }
 })
 d4_button3.addEventListener("click", () => { //NO CHANGE NECESSARY HERE
-    d4_button3.src = "./images/console/72ppi/tamagochi_D4_button3_lit.png"
+    d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_lit.png"
     chosenName.extra1();
     renderData();
 })
@@ -371,30 +373,30 @@ d4_button3.addEventListener("click", () => { //NO CHANGE NECESSARY HERE
 //EXTRA2 BUTTON - WE NEED TO USE IF/ELSE TO GIVE THE CORRECT MOUSEOVER PIX
 d5_button4.addEventListener("mouseenter", () => {
     if (chosenName == petArray[0]) {
-        c5_extra2.src = "./images/console/72ppi/tamagochi_C5_dig_lit.png"
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_lit.png"
     } else if (chosenName == petArray[4]) {
-        c5_extra2.src = "./images/console/72ppi/tamagochi_C5_ask_lit.png"
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_ask_lit.png"
     } else {
-        c5_extra2.src = "./images/console/72ppi/tamagochi_C5_extra2_lit.png"
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_extra2_lit.png"
     }
 })
 
 d5_button4.addEventListener("mouseleave", () => {
     if (chosenName == petArray[0]) {
-        c5_extra2.src = "./images/console/72ppi/tamagochi_C5_dig_unlit.png"
-        d5_button4.src = "./images/console/72ppi/tamagochi_D5_button4_unlit.png"
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_unlit.png"
+        d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
     } else if (chosenName == petArray[4]) {
-        c5_extra2.src = "./images/console/72ppi/tamagochi_C5_ask_unlit.png"
-        d5_button4.src = "./images/console/72ppi/tamagochi_D5_button4_unlit.png"
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_ask_unlit.png"
+        d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
     }
     else {
-        c5_extra2.src = "./images/console/72ppi/tamagochi_C5_extra2_unlit.png"
-        d5_button4.src = "./images/console/72ppi/tamagochi_D5_button4_unlit.png"
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_extra2_unlit.png"
+        d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
     }
 })
 
 d5_button4.addEventListener("click", () => {
-    d5_button4.src = "./images/console/72ppi/tamagochi_D5_button4_lit.png"
+    d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_lit.png"
     chosenName.extra2();
     renderData();
 })

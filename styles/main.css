@@ -1,7 +1,8 @@
 body {
-  background: linear-gradient(-45deg, #ee7752, #3cb1e7, #6942d3, #23d5ab);
+  /* background: linear-gradient(-45deg, #ee7752, #3cb1e7, #6942d3, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
+  animation: gradient 20s ease infinite; */
+  background-color: rgb(77, 77, 118);
 }
 
 html,
@@ -27,7 +28,8 @@ body {
 .my-text {
   color: #fff;
   text-align: left;
-  font-size: 8px;
+  font-size: 14px;
+  font-family: 'Share Tech Mono',monospace;
 }
 
 
@@ -66,44 +68,49 @@ button:focus {
 }
 
 button {
+  margin-left: 20px;
+  margin-right: 20px;
   background: none;
   width: 100px;
   border: 2px solid;
   text-align: center;
   font-family: monospace;
-  line-height: .2;
-  /* margin: 0.5em; */
-  padding: 2em 2em;
+  line-height: 0;
+  padding: 20px;
   border-radius: 50%;
   overflow: hidden;
 }
 
 #choice-buttons {
-  padding: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-#main-board {
-  /* border: solid red 2px; */
-  /* width: 100%; */
-  padding: 10px;
+  margin: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* border: solid black 2px; */
+}
+
+#main-board {
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 #left-side {
   display: block;
-  width: 25%;
-  height: 449px;
-  border: solid rgb(119, 171, 255) 1px;
+  width: 20%;
+  height: 600px;
+  /* border: solid rgb(119, 171, 255) 1px; */
+  background-image: '../images/graph.png';
+}
+
+#type, #my-new-name, #age {
+  margin-left: 10px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 2em;
 }
 
 #image-container {
-  /* border: solid black 2px; */
   width: auto;
   padding: 0px 25px;
   /* height: 25%; */
@@ -136,12 +143,13 @@ button {
   justify-content: center;
 }
 
+/* SETS THE SIZE OF THE SCREEN AREA */
 #screen {
   /* background-image: url("./Images/console/tamagochi_B2.png"); */
   display: block;
-  width: 240px;
-  height: 154px;
-  color: #fff;
+  width: 352px;
+  height: 220px;
+  /* color: #fff; */
   text-shadow:
     0 0 7px #fff,
     0 0 10px #fff,
@@ -156,7 +164,7 @@ button {
 
 #stats {
   margin-top: 16px;
-  margin-left: 10px;
+  margin-left: 6px;
   line-height: 6px;
 }
 
@@ -189,8 +197,8 @@ button {
 
 #right-side {
   display: block;
-  width: 25%;
-  height: 449px;
+  width: 20%;
+  height: 600px;
   border: solid rgb(119, 171, 255) 1px;
 }
 

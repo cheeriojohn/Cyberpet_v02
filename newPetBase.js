@@ -35,6 +35,14 @@ const d6 = document.getElementById("d6");
 
 const e1 = document.getElementById("e1");
 
+//CONSTANTS FOR THE AREAS TO LEFT AND RIGHT OF THE CONSOLE
+const leftside = document.getElementById("left-side")
+const rightside = document.getElementById("right-side")
+
+//HIDE THE LEFT AND RIGHT SIDE ON START
+leftside.style.display = "none"
+rightside.style.display = "none"
+
 //'CHOOSE A PET' BUTTONS
 const caseyButton = document.getElementById("casey");
 const matthewButton = document.getElementById("matthew")
@@ -97,6 +105,15 @@ d5_button4.src = "./Images/console/700pxh/tamagochi_D5_button4_unlit.png";
 d6.src = "./Images/console/700pxh/tamagochi_D6.png";
 
 e1.src = "./Images/console/700pxh/tamagochi_E1.png";
+
+//SOME NICK CONSTANTS
+let fishpix = ["./images/nickpix/fish_100px.png", "./images/nickpix/fish_100px.png", "./images/nickpix/fish_100px.png", "./images/nickpix/fish_100px.png", "./images/nickpix/fish_100px.png"]
+const formatArray = () => {
+    let formatFish = fishpix.map(moreStuff => `<img src=${moreStuff}>`).join('\n');
+    rightside.innerHTML = formatFish;
+}
+const splash = document.getElementById("splash")
+
 
 class Cyberpet {
     constructor(type, name, age, happiness, cleanliness, hunger, thirst) {
@@ -204,7 +221,14 @@ class SealPet extends Cyberpet {
         // pro
         this.happiness += 5;
     }
+
+    //DIVE:  - BACKGROUND IMAGE: Photo by <a href="https://unsplash.com/@hisarahlee?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sarah Lee</a> on <a href="https://unsplash.com/s/photos/underwater?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
     extra1() {
+        document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/underwater.jpg");background-size:cover;');
+        splash.play();
+        fishpix.push("./images/nickpix/fish_100px.png");
+        formatArray()
+
         // petPic.src = "./images/ferret.wriggle.gif"
         this.hunger -= 100
     }
@@ -294,17 +318,54 @@ adamButton.addEventListener("click", () => {
 
 // NICK BUTTON
 // IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
+
 nickButton.addEventListener("click", () => {
+    //GET THE CORRECT NAME
     chosenName = petArray[4]
+
+    //CHANGE BACKGROUND
+    document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/paper.jpg");background-size:cover;');
+
+    //PUT BACKGROUNDS ON BUTTONS
+    caseyButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
+    matthewButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
+    adamButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
+    nickButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
+    shinaButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
+
+    //SHOW LEFT AND RIGHT SIDE
+    leftside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; line-height: 1em;')
+    rightside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; text-align: center')
+
+    //FONTS ON LEFT SIDE
+    type.setAttribute('style','font-family:"Open Sans";font-size: 1.2em; line-height: 0.4em');
+    myNewName.setAttribute('style','font-family:"Open Sans";font-size: 1.2em; line-height: 0.4em');
+    age.setAttribute('style','font-family:"Open Sans";font-size: 1.2em; line-height: 0.4em');
+
+    //PLACE NAME IMAGE AT TOP OF CONSOLE
     a2.src = "./Images/console/700pxh/tamagochi_A2_nick.png"; //Name on top 
+
+    //PUT IMAGE ON SCREEN
     document.getElementById("screen").setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_nick1.png")');
+
+    //ENTER FISH ON RIGHT SIDE
+    // document.getElementById("right-side").setAttribute('style', 'border: none;background-color: rgba(137, 123, 112, .5); border-radius: 25px')
+    rightside.innerHTML = fishpix;
+    formatArray()
+
+    //CHANGE BUTTON LABELS
     c4_extra1.src = "./images/console/700pxh/tamagochi_C4_dive_unlit.png";
     c5_extra2.src = "./images/console/700pxh/tamagochi_C5_ask_unlit.png";
+
     // paras.classList.add('my-new-text')
     NickPet.addNick(); // Casey's code!!!! Yay!
     scoreName5 = 'dive'
     scoreName6 = 'ask'
+
+    //DISPLAY STATS IN THEIR LOCATIONS
     stats.style.display = 'block'; // SHOW THE STATS
+
+    //RENDER THE DATA
     renderData();
 })
 
@@ -318,13 +379,16 @@ d2_button1.addEventListener("mouseleave", () => {
     c2_munch.src = "./images/console/700pxh/tamagochi_C2_munch_unlit.png"
     d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_unlit.png"
 })
-d2_button1.addEventListener("click", () => {
+d2_button1.addEventListener("mousedown", () => {
     d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_lit.png"
 
     chosenName.giveFood();
     // checkCondition();
     // flag = true;
     renderData();
+})
+d2_button1.addEventListener("mouseup", () => {
+    d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_unlit.png"
 })
 
 //SLURP BUTTON
@@ -335,10 +399,13 @@ d3_button2.addEventListener("mouseleave", () => {
     c3_slurp.src = "./images/console/700pxh/tamagochi_C3_slurp_unlit.png"
     d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_unlit.png"
 })
-d3_button2.addEventListener("click", () => {
+d3_button2.addEventListener("mousedown", () => {
     d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_lit.png"
     chosenName.giveDrink()
     renderData();
+})
+d3_button2.addEventListener("mouseup", () => {
+    d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_unlit.png"
 })
 
 //EXTRA1 BUTTON - WE NEED TO USE IF/ELSE TO GIVE THE CORRECT MOUSEOVER PIX
@@ -364,11 +431,15 @@ d4_button3.addEventListener("mouseleave", () => {
         d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
     }
 })
-d4_button3.addEventListener("click", () => { //NO CHANGE NECESSARY HERE
+d4_button3.addEventListener("mousedown", () => { //NO CHANGE NECESSARY HERE
     d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_lit.png"
     chosenName.extra1();
     renderData();
 })
+d4_button3.addEventListener("mouseup", () => { //NO CHANGE NECESSARY HERE
+    d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
+})
+
 
 //EXTRA2 BUTTON - WE NEED TO USE IF/ELSE TO GIVE THE CORRECT MOUSEOVER PIX
 d5_button4.addEventListener("mouseenter", () => {
@@ -395,8 +466,11 @@ d5_button4.addEventListener("mouseleave", () => {
     }
 })
 
-d5_button4.addEventListener("click", () => {
+d5_button4.addEventListener("mousedown", () => {
     d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_lit.png"
     chosenName.extra2();
     renderData();
+})
+d5_button4.addEventListener("mouseup", () => {
+    d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
 })

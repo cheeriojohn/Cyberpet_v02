@@ -324,14 +324,16 @@ nickButton.addEventListener("click", () => {
     chosenName = petArray[4]
 
     //CHANGE BACKGROUND
-    document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/paper.jpg");background-size:cover;');
+    // document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/paper.jpg");background-size:cover;');
+    document.querySelector("body").setAttribute('style', 'background-color: #2E84DB');
 
     //PUT BACKGROUNDS ON BUTTONS
-    caseyButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
-    matthewButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
-    adamButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
-    nickButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
-    shinaButton.setAttribute('style', 'background-color:rgba(137, 123, 112, .75)')
+    const buttonStyle = 
+    caseyButton.setAttribute('style', 'background-color:#2f7cca')
+    matthewButton.setAttribute('style', 'background-color:#2f7cca')
+    adamButton.setAttribute('style', 'background-color:#2f7cca')
+    nickButton.setAttribute('style', 'background-color:#2f7cca')
+    shinaButton.setAttribute('style', 'background-color:#2f7cca')
 
     //SHOW LEFT AND RIGHT SIDE
     leftside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; line-height: 1em;')
@@ -364,6 +366,24 @@ nickButton.addEventListener("click", () => {
 
     //DISPLAY STATS IN THEIR LOCATIONS
     stats.style.display = 'block'; // SHOW THE STATS
+
+
+
+    //SET THE TIMER GOING
+    const timingFunction = () => {
+        window.setTimeout(() => {
+            chosenName.happiness -= 2;
+            chosenName.cleanliness -= 2;
+            chosenName.hunger -= 10 ;
+            chosenName.thirst -= 2;
+            chosenName.score5 -= 2;
+            chosenName.score6 -= 2;
+            // checkCondition();
+            renderData();
+            timingFunction();
+        }, 2000);
+    }
+    timingFunction();
 
     //RENDER THE DATA
     renderData();
@@ -474,3 +494,7 @@ d5_button4.addEventListener("mousedown", () => {
 d5_button4.addEventListener("mouseup", () => {
     d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
 })
+
+
+
+

@@ -29,7 +29,22 @@ body {
   color: #fff;
   text-align: left;
   font-size: 14px;
-  font-family: 'Share Tech Mono',monospace;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* #gimme-name-div {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+} */
+
+#gimme-name {
+  margin-top: 100px;
+  margin-left: 71px;
+  font-family: fantasy;
+  color: red;
+  width: 200px;
+
 }
 
 
@@ -80,6 +95,25 @@ button {
   border-radius: 50%;
   overflow: hidden;
 }
+/* 
+#gimme-name-div {
+  
+} */
+
+#name-button-submit {
+  margin-top: 20px;
+  margin-left: 141px;
+  /* display: flex;
+  flex-direction: row; */
+  /* justify-content: center; */
+  border-radius: 25%;
+  border: 1px solid rgb(197, 171, 22);
+  padding: 2px;
+  line-height: 1.3em;
+  width: 70px;
+  background-color: rgb(240, 217, 88);
+  box-shadow: 0px 0px 5px rgb(127, 125, 6);
+}
 
 #choice-buttons {
   margin: 0;
@@ -104,7 +138,9 @@ button {
   background-image: '../images/graph.png';
 }
 
-#type, #my-new-name, #age {
+#type,
+#my-new-name,
+#age {
   margin-left: 10px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 2em;

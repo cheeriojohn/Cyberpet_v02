@@ -2,7 +2,9 @@
 
 //HEADER
 const myHeading = document.getElementsByTagName("h1")[0];
-const giveMeAName = document.querySelector(".input-and-sumbit-cont")
+const gimmeNameDiv = document.getElementById("gimme-name-div")
+const gimmeNameInput = document.querySelector("#gimme-name")
+gimmeNameDiv.style.display = 'none'
 let chosenName
 // let activity1 = 'new-activity-1'//variable for first extra function
 // let activity2 = 'new-activity-2'//variable for second extra function
@@ -113,6 +115,25 @@ const formatArray = () => {
     rightside.innerHTML = formatFish;
 }
 const splash = document.getElementById("splash")
+
+// PET NAME STUFF
+const nameButtonSubmit = document.getElementById("name-button-submit")
+nameButtonSubmit.addEventListener("click", () => {
+    chosenName.name = gimmeNameInput.value
+    console.log(`pet's name is ${chosenName.name}`)
+     //DISPLAY STATS IN THEIR LOCATIONS
+     stats.style.display = 'block'; // SHOW THE STATS
+
+     gimmeNameDiv.style.display = 'none'
+         //PUT IMAGE ON SCREEN
+    document.getElementById("screen").setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_nick1.png")');
+
+})
+const gimmeName = () => {
+    screen.setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_gimme-name-trans.png"); background-color:#f5d629');
+    gimmeNameDiv.style.display = 'block'
+
+}  
 
 
 class Cyberpet {
@@ -323,9 +344,13 @@ nickButton.addEventListener("click", () => {
     //GET THE CORRECT NAME
     chosenName = petArray[4]
 
+    //RUN THE NAME FUNCTION
+    gimmeName()
+
     //CHANGE BACKGROUND
     // document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/paper.jpg");background-size:cover;');
     document.querySelector("body").setAttribute('style', 'background-color: #2E84DB');
+
 
     //PUT BACKGROUNDS ON BUTTONS
     const buttonStyle = 
@@ -348,7 +373,7 @@ nickButton.addEventListener("click", () => {
     a2.src = "./Images/console/700pxh/tamagochi_A2_nick.png"; //Name on top 
 
     //PUT IMAGE ON SCREEN
-    document.getElementById("screen").setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_nick1.png")');
+    // document.getElementById("screen").setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_nick1.png")');
 
     //ENTER FISH ON RIGHT SIDE
     // document.getElementById("right-side").setAttribute('style', 'border: none;background-color: rgba(137, 123, 112, .5); border-radius: 25px')
@@ -364,8 +389,7 @@ nickButton.addEventListener("click", () => {
     scoreName5 = 'dive'
     scoreName6 = 'ask'
 
-    //DISPLAY STATS IN THEIR LOCATIONS
-    stats.style.display = 'block'; // SHOW THE STATS
+   
 
 
 

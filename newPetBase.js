@@ -175,11 +175,11 @@ const splash = document.getElementById("splash")
 //SET THE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
 const timingFunction = () => {
     window.setTimeout(() => {
-        chosenName.age +=1;
+        // chosenName.age +=1;
         chosenName.happiness -= 0;
         chosenName.cleanliness -= 2;
-        chosenName.hunger += 2;
-        chosenName.thirst += 2;
+        chosenName.hunger -= 2;
+        chosenName.thirst -= 2;
         // checkCondition();
         renderData();
         timingFunction();
@@ -192,6 +192,13 @@ const timingFunction = () => {
 // PET NAME STUFF
 const nameButtonSubmit = document.getElementById("name-button-submit")
 
+
+const gimmeName = () => {
+    screen.setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_gimme-name-trans.png"); background-color:#f5d629');
+    console.log(`background color = #f5d629`)
+    gimmeNameDiv.style.display = 'block';
+}
+
 nameButtonSubmit.addEventListener("click", () => {
     chosenName.name = gimmeNameInput.value; //APPLIES THE NAME
     stats.style.display = 'block'; // SHOW THE STATS
@@ -202,11 +209,6 @@ nameButtonSubmit.addEventListener("click", () => {
     timingFunction();
 
 })
-const gimmeName = () => {
-    screen.setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_gimme-name-trans.png"); background-color:#f5d629');
-    console.log(`background color = #f5d629`)
-    gimmeNameDiv.style.display = 'block';
-}
 
 
 class Cyberpet {
@@ -255,23 +257,42 @@ class FerretPet extends Cyberpet {
     }
     giveFood() {
         // con
-        this.hunger -= 40;
-        this.cleanliness -= 40;
+        this.hunger += 5;
+        this.cleanliness += 3;
         // pro
-        this.happiness += 50;
+        this.happiness += 5;
     }
     giveDrink() {
         // con
-        this.hunger -= 5;
+        // this.hunger -= 5;
+        this.thirst += 5;
         this.cleanliness -= 5;
         // pro
         this.happiness += 5;
     }
     extra1() {
         // petPic.src = "./images/ferret.wriggle.gif"
-        this.hunger -= 100
+        const ferretDance = () => {
+            screen.style.backgroundImage = 'url("./images/caseypix/ferretwriggle2.gif';
+            window.setTimeout(() => {
+                screen.style.backgroundImage = 'url("./images/caseypix/tamagochi_B2_ferret.png';
+        
+            }, 2000);
+        }
+    ferretDance()    
+        
+        this.hunger += 5
     }
     extra2() {
+        this.thirst += 5
+        const ferretDig = () => {
+            screen.style.backgroundImage = 'url("./images/caseypix/ferret-ferret-lancer2.gif';
+            window.setTimeout(() => {
+                screen.style.backgroundImage = 'url("./images/caseypix/tamagochi_B2_ferret.png';
+        
+            }, 2000);
+        }
+    ferretDig()    
 
     }
 }
@@ -289,6 +310,7 @@ class DogPet extends Cyberpet {
     }
     extra1() {
         // petPic.src = "./images/dribbledog.gif"
+
     }
     extra2() {
 
@@ -385,7 +407,7 @@ class SealPet extends Cyberpet {
 
 
 //each constant has 8 entries: Type, name, age, happiness, cleanliness, hunger, thirst, FOUR picture spaces,plus two extra
-const CaseyPet = new FerretPet("Ferret", "Niffler", "10", 50, 50, 50, 50, '', '', '', '', 50, 50)
+const CaseyPet = new FerretPet("Ferret", "", 10, 50, 50, 50, 50, 'url("./images/caseypix/tamagochi_B2_ferret.png', '', 'url("./images/caseypix/ferretwriggle2.gif', '', 50, 50)
 const MatthewPet = new DogPet("dog", "", "23", 50, 50, 50, 50, '', '', '', '', 30, 80)
 const AdamPet = new Cyberpet("cat", "", "27", 50, 50, 55, 52, '', '', '', '', 50, 64)
 const ShinaPet = new Cyberpet("mouse", "", "32", 50, 50, 50, 50, '', '', '', '', 50, 50)
@@ -410,10 +432,41 @@ const renderData = () => {
 //CASEY BUTTON
 // IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 caseyButton.addEventListener("click", () => {
+
+    //NEW CODE 18 JAN 2023
+    //GET THE CORRECT NAME
+    chosenName = petArray[4]
+
+    //RUN THE NAME FUNCTION
+    gimmeName()
+
+        //CHANGE BACKGROUND
+    // document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/paper.jpg");background-size:cover;');
+    document.querySelector("body").setAttribute('style', 'background-color: #3B2615');
+
+    //PUT BACKGROUNDS ON BUTTONS
+    const buttonStyle =
+    caseyButton.setAttribute('style', 'background-color:#87542A; color: white;')
+    matthewButton.setAttribute('style', 'background-color:#87542A; color: white;')
+    adamButton.setAttribute('style', 'background-color:#87542A; color: white;')
+    nickButton.setAttribute('style', 'background-color:#87542A; color: white;')
+    shinaButton.setAttribute('style', 'background-color:#87542A; color: white;')
+
+    //SHOW LEFT AND RIGHT SIDE
+    leftside.setAttribute('style', 'display: "block"; line-height: 1em;')
+    rightside.setAttribute('style', 'display: "block";border:0px')
+
+    //FONTS ON LEFT SIDE
+    type.setAttribute('style', 'font-family:"Open Sans";font-size: 1.4em; line-height: 0.8em');
+    myNewName.setAttribute('style', 'font-family:"Open Sans";font-size: 1.4em; line-height: 0.8em');
+    age.setAttribute('style', 'font-family:"Open Sans";font-size: 1.4em; line-height: 0.8em');
+
+
+    //NEW CODE END
     a2.src = "./Images/console/700pxh/tamagochi_A2_casey.png"; //Name on top of console
-    c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_unlit.png";
-    c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_unlit.png"
-    document.getElementById("screen").setAttribute('style', 'background-color:black');
+    c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_unlit.png"; //put name on wriggle button
+    c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_unlit.png"  //put name on dig button
+    // document.getElementById("screen").setAttribute('style', 'background-color:#38873a');
 
     // b2.src = "./images/ferret_1.png"
     chosenName = petArray[0]
@@ -421,8 +474,8 @@ caseyButton.addEventListener("click", () => {
     scoreName5 = 'wriggle';
     scoreName6 = 'dig';
     stats.style.display = 'block'; // SHOW THE STATS
-    type.style.color = 'red';
-    type.style.fontFamily = 'monospace'
+    // type.style.color = 'red';
+    // type.style.fontFamily = 'monospace'
     renderData();
 })
 

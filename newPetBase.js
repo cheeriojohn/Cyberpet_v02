@@ -132,7 +132,8 @@ const quotes = [
     "We are an impossibility in an impossible universe.",
     "I suppose it is tempting, if the only tool you have is a hammer, to treat everything as if it were a nail.",
     "Reading, after a certain age, diverts the mind too much from its creative pursuits. Any man who reads too much and uses his own brain too little falls into lazy habits of thinking.",
-    "Be yourself; everyone else is already taken.", "You only live once, but if you do it right, once is enough.",
+    "Be yourself; everyone else is already taken.",
+    "You only live once, but if you do it right, once is enough.",
     "If you want to know what a man's like, take a good look at how he treats his inferiors, not his equals.",
     "I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.",
     "I am so clever that sometimes I don't understand a single word of what I am saying.",
@@ -171,6 +172,65 @@ const formatArray = () => {
 }
 const splash = document.getElementById("splash")
 
+const nickGameOver = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>That's it!</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>GAME OVER!</p>`
+
+const whoAmI = () => {
+    leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>Well, hello! I'm a ${chosenName.type}.</p><p id="my-new-name" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>You can call me ${chosenName.name}.</p><p id="age" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>I'm ${chosenName.age} years-old.</p>`
+    // screen.style.backgroundImage = chosenName.pic1; //CHANGE TO THE START SCREEN FOR CHOSEN PET  
+    };
+
+function checkState() {
+    // console.log(chosenName.hunger)
+    if(fishpix.length == 0) {
+        leftside.innerHTML = nickGameOver;
+        screen.style.backgroundImage = chosenName.pic4; // DEAD SEAL PIC
+    } else if(fishpix.length <= 2) {
+        window.setTimeout(() => {
+        whoAmI();
+        renderData();
+        }, 2000);
+leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>HELP!</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>NEED FISH</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>MUST DIVE</p>`
+    }
+
+    if (chosenName.happiness >= 100) {
+        chosenName.happiness = 100;
+    }
+    if  (chosenName.cleanliness >= 100) {
+        chosenName.cleanliness = 100
+    }
+    if (chosenName.thirst >= 100) {
+        chosenName.thirst = 100;
+    }
+    if (chosenName.happiness <= 40) {
+        // image.src = "./images/pikaPunk.jpg"
+    }
+    if (chosenName.happiness <= 30 || chosenName.hunger <= 10 || chosenName.thirst <= 5 || chosenName.cleanliness <= 30) {
+        screen.style.backgroundImage = chosenName.pic3; // SICK SEAL PIC
+    }
+
+    if (chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0) {
+        leftside.innerHTML = nickGameOver;
+        screen.style.backgroundImage = chosenName.pic4; // DEAD SEAL PIC
+    }
+
+    if (chosenName.hunger <= 0) {
+        chosenName.hunger = 0
+    };
+    if (chosenName.happiness <= 0) {
+        chosenName.happiness = 0
+    };
+    if (chosenName.thirst <= 0) {
+        chosenName.thirst = 0
+    // } else if (chosenName.health <= 0) {
+    //     chosenName.health = 0;
+    };
+    if (chosenName.cleanliness <= 0) {
+        chosenName.cleanliness = 0;
+    };
+
+}
+
+
 //SET THE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
 const timingFunction = () => {
     window.setTimeout(() => {
@@ -178,7 +238,7 @@ const timingFunction = () => {
         chosenName.cleanliness -= 2;
         chosenName.hunger -= 2;
         chosenName.thirst -= 2;
-        // checkCondition();
+        checkState();
         renderData();
         timingFunction();
     }, 2000);
@@ -188,7 +248,7 @@ const timingFunction = () => {
 const timingFunctionAge = () => {
     window.setTimeout(() => {
         chosenName.age += 1;
-        // checkCondition();
+        // checkState();
         // renderData();
         timingFunctionAge();
     }, 16000); //AGE WILL INCREASE BY 1 YEAR EVERY 16 SECONDS - WE DON'T USE THE RENDER DATA IN HERE AS IT IS COINCIDES WITH EVERY 4th PASS OF timingFunction()
@@ -287,7 +347,7 @@ class FerretPet extends Cyberpet {
             window.setTimeout(() => {
                 screen.style.backgroundImage = 'url("./images/caseypix/tamagochi_B2_ferret.png';
 
-            }, 2000);
+            }, 3000);
         }
         ferretDance()
 
@@ -300,7 +360,7 @@ class FerretPet extends Cyberpet {
             window.setTimeout(() => {
                 screen.style.backgroundImage = 'url("./images/caseypix/tamagochi_B2_ferret.png';
 
-            }, 2000);
+            }, 3000);
         }
         ferretDig()
 
@@ -342,10 +402,10 @@ class SealPet extends Cyberpet {
         fishpix.pop()
         formatArray()
         // con
-        this.hunger -= 40;
-        this.cleanliness -= 40;
+        this.hunger += Math.floor(Math.random() * 4);
+        this.cleanliness += Math.floor(Math.random() * 3);
         // pro
-        this.happiness += 50;
+        this.happiness += Math.floor(Math.random() * 3);
     }
     giveDrink() {
         // con
@@ -357,11 +417,21 @@ class SealPet extends Cyberpet {
 
     //DIVE:  - BACKGROUND IMAGE: Photo by <a href="https://unsplash.com/@hisarahlee?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sarah Lee</a> on <a href="https://unsplash.com/s/photos/underwater?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
     extra1() {
-        // document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/underwater.jpg");background-size:cover;');
+        chosenName.score5 ++
+        chosenName.cleanliness  += Math.floor(Math.random() * 8);
+
         splash.play();
         screen.style.backgroundImage = chosenName.pic2;
-        setTimeout(function () { screen.style.backgroundImage = chosenName.pic1; }, 3000);
+        setTimeout(function () { 
+            screen.style.backgroundImage = chosenName.pic1; 
+            checkState()
+        }, 3000);
         let myCatch = Math.floor(Math.random() * 3) + 1; // No. of fish caught
+        // if (myCatch + fishpix.length > 10){
+        //     myCatch = 10 - fishpix.length
+        // }
+        // console.log(`My catch is ${myCatch}\nNumber of fish = ${fishpix.length}`)
+        
         let rate = [
             (Math.floor(Math.random() * 800)) + 200, // Time between catches
             (Math.floor(Math.random() * 800)) + 200,
@@ -379,7 +449,7 @@ class SealPet extends Cyberpet {
             // display the current time
             let dateTime = new Date();
             let time = dateTime.toLocaleTimeString();
-            console.log(time);
+            // console.log(time);
             fishpix.push("./images/nickpix/fish_100px.png");
             formatArray()
             this.happiness += 3;
@@ -394,6 +464,8 @@ class SealPet extends Cyberpet {
 
     //ASK BUTTON
     extra2() {
+        chosenName.score6 ++
+        chosenName.cleanliness  += Math.floor(Math.random() * 4);
         const askQuestion = () => {
             let askPic = Math.floor(Math.random() * 3)
             console.log(askPic)
@@ -416,11 +488,12 @@ class SealPet extends Cyberpet {
 
 
             window.setTimeout(() => {
-                leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>Well, hello! I'm a ${chosenName.type}.</p><p id="my-new-name" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>You can call me ${chosenName.name}.</p><p id="age" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>I'm ${chosenName.age} years-old.</p>`
-                screen.style.backgroundImage = chosenName.pic1; //CHANGE TO THE START SCREEN FOR CHOSEN PET  
+                whoAmI();
+                screen.style.backgroundImage = chosenName.pic1; //CHANGE TO THE START SCREEN FOR CHOSEN PET 
+                checkState(); 
                 
 
-            }, 8000); // 8 SECONDS TO READ THE TEXT
+            }, 5000); // 8 SECONDS TO READ THE TEXT
         }
         askQuestion()
         
@@ -433,7 +506,7 @@ const CaseyPet = new FerretPet("ferret", "", 10, 50, 50, 50, 50, 'url("./images/
 const MatthewPet = new DogPet("troll", "", 23, 50, 50, 50, 50, 'url("./images/console/700pxh/troll1.png")', '', '', '', 30, 80)
 const AdamPet = new Cyberpet("monkey", "", 27, 50, 50, 55, 52, 'url("./images/console/700pxh/monkey1.png")', '', '', '', 50, 64)
 const ShinaPet = new Cyberpet("snail", "", 32, 50, 50, 50, 50, 'url("./images/console/700pxh/snail1.png")', '', '', '', 50, 50)
-const NickPet = new SealPet("seal", "", 580, 50, 50, 50, 50, 'url("./images/nickpix/seal_start.jpg")', 'url("./images/nickpix/seal-swimming.jpg")', '', '', 50, 50)
+const NickPet = new SealPet("seal", "", 580, 50, 50, 50, 50, 'url("./images/nickpix/seal_start.jpg")', 'url("./images/nickpix/seal-swimming.jpg")', 'url("./images/nickpix/sick-seal.png")', 'url("./images/nickpix/dead-seal.jpg")', 0, 0)
 
 //We use the petArray below as a means of capturing the pet in each of the buttons (caseypet, matthewpet, etc...)
 let petArray = [CaseyPet, MatthewPet, AdamPet, ShinaPet, NickPet]
@@ -653,7 +726,7 @@ d2_button1.addEventListener("mousedown", () => {
     d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_lit.png"
 
     chosenName.giveFood();
-    // checkCondition();
+    checkState();
     // flag = true;
     renderData();
 })

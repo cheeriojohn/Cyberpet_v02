@@ -234,10 +234,10 @@ leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Gro
 //SET THE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
 const timingFunction = () => {
     window.setTimeout(() => {
-        chosenName.happiness -= 1;
-        chosenName.cleanliness -= 2;
-        chosenName.hunger -= 2;
-        chosenName.thirst -= 2;
+        chosenName.happiness -= Math.floor(Math.random() * 3);
+        chosenName.cleanliness -= Math.floor(Math.random() * 2);
+        chosenName.hunger -= Math.floor(Math.random() * 2);
+        chosenName.thirst -= Math.floor(Math.random() * 2);
         checkState();
         renderData();
         timingFunction();
@@ -409,8 +409,9 @@ class SealPet extends Cyberpet {
     }
     giveDrink() {
         // con
-        this.hunger -= 5;
-        this.cleanliness -= 5;
+        console.log(thirst)
+        this.thirst += 5;
+        this.cleanliness -= 2;
         // pro
         this.happiness += 5;
     }

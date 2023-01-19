@@ -109,8 +109,8 @@ button {
 #my-new-name,
 #age {
   margin-left: 10px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 2em;
+  font-family: 'Irish Grover', cursive;
+  font-size: 1.5em;
 }
 
 #image-container {
@@ -202,5 +202,5 @@ button {
   display: block;
   width: 20%;
   height: 600px;
-  border: solid rgb(119, 171, 255) 1px;
+  /* border: solid rgb(119, 171, 255) 1px; */
 }

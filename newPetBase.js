@@ -6,11 +6,7 @@ const gimmeNameDiv = document.getElementById("gimme-name-div")
 const gimmeNameInput = document.querySelector("#gimme-name")
 gimmeNameDiv.style.display = 'none'
 let chosenName
-// let activity1 = 'new-activity-1'//variable for first extra function
-// let activity2 = 'new-activity-2'//variable for second extra function
 
-// //PICTURE
-// const petPic = document.getElementById("myPetPic") //The pic that appears when a pet is initially chosen
 
 //CONSOLE IMAGE
 const a1 = document.getElementById("a1");
@@ -53,9 +49,11 @@ const nickButton = document.getElementById("nick")
 const shinaButton = document.getElementById("shina")
 
 //CHARACTERISTICS - TYPE, NAME, AGE - THESE IDENTIFY WHERE THE TEXT APPEARS IN THE HTML
-const type = document.getElementById("type")
-const myNewName = document.getElementById("my-new-name")
-const age = document.getElementById("age")
+const type = document.getElementById("type");
+const myNewName = document.getElementById("my-new-name");
+myNewName.style.visibility = 'hidden'; //HIDE THIS TEXT TILL AFTER THE PET HAS BEEN GIVEN A NAME
+const age = document.getElementById("age");
+age.style.visibility = 'hidden'; //HIDE THIS TEXT TILL AFTER THE PET HAS BEEN GIVEN A NAME
 
 //SCORES - THESE IDENTIFY WHERE THE TEXT APPEARS IN THE HTML
 const happiness = document.getElementById("happiness") //SCORE No.1
@@ -89,7 +87,7 @@ a2.src = "./Images/console/700pxh/tamagochi_A2.png"; //This one changes when the
 a3.src = "./Images/console/700pxh/tamagochi_A3.png";
 
 b1.src = "./Images/console/700pxh/tamagochi_B1.png";
-// b2.src = "./Images/console/700pxh/tamagochi_B2.png"; // This is where the pet pic appears
+// the screen picture comes from the SUB-CLASSES or from the gimmeName() code
 b3.src = "./Images/console/700pxh/tamagochi_B3.png";
 
 c1.src = "./Images/console/700pxh/tamagochi_C1.png";
@@ -164,6 +162,7 @@ let fishpix = [
     "./images/nickpix/fish_100px.png",
     "./images/nickpix/fish_100px.png",
     "./images/nickpix/fish_100px.png",
+    "./images/nickpix/fish_100px.png",
     "./images/nickpix/fish_100px.png"
 ]
 const formatArray = () => {
@@ -175,8 +174,7 @@ const splash = document.getElementById("splash")
 //SET THE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
 const timingFunction = () => {
     window.setTimeout(() => {
-        // chosenName.age +=1;
-        chosenName.happiness -= 0;
+        chosenName.happiness -= 1;
         chosenName.cleanliness -= 2;
         chosenName.hunger -= 2;
         chosenName.thirst -= 2;
@@ -185,7 +183,17 @@ const timingFunction = () => {
         timingFunction();
     }, 2000);
 }
-// timingFunction();
+
+//SET THE AGE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
+const timingFunctionAge = () => {
+    window.setTimeout(() => {
+        chosenName.age += 1;
+        // checkCondition();
+        // renderData();
+        timingFunctionAge();
+    }, 16000); //AGE WILL INCREASE BY 1 YEAR EVERY 16 SECONDS - WE DON'T USE THE RENDER DATA IN HERE AS IT IS COINCIDES WITH EVERY 4th PASS OF timingFunction()
+}
+
 
 
 
@@ -195,7 +203,6 @@ const nameButtonSubmit = document.getElementById("name-button-submit")
 
 const gimmeName = () => {
     screen.setAttribute('style', 'background-image:url("./images/console/700pxh/tamagochi_B2_gimme-name-trans.png"); background-color:#f5d629');
-    console.log(`background color = #f5d629`)
     gimmeNameDiv.style.display = 'block';
 }
 
@@ -203,10 +210,14 @@ nameButtonSubmit.addEventListener("click", () => {
     chosenName.name = gimmeNameInput.value; //APPLIES THE NAME
     stats.style.display = 'block'; // SHOW THE STATS
     gimmeNameDiv.style.display = 'none'; //REMOVE THE GIMMENAME SCREEN
-    
     screen.style.backgroundImage = chosenName.pic1; //CHANGE TO THE START SCREEN FOR CHOSEN PET
-    
-    timingFunction();
+    screen.style.backgroundColor = '#191b49'
+    myNewName.setAttribute('style', 'display:block;'); //BRINGS UP THE "MY NAME IS..." TEXT IN LEFT BOX
+    renderData()
+    age.setAttribute('style', 'display:block;'); //BRINGS UP THE "MY AGE IS..." TEXT IN LEFT BOX
+
+    timingFunction(); //STARTS THE TIMER THAT CHANGES THE HAPPINESS, CLEANLINESS, HUNGER AND THIRST STATS ON A REGULAR BASIS
+    timingFunctionAge(); //STARTS THE TIMER THAT CHANGES THE AGE STATS ON A REGULAR BASIS
 
 })
 
@@ -271,16 +282,15 @@ class FerretPet extends Cyberpet {
         this.happiness += 5;
     }
     extra1() {
-        // petPic.src = "./images/ferret.wriggle.gif"
         const ferretDance = () => {
             screen.style.backgroundImage = 'url("./images/caseypix/ferretwriggle2.gif';
             window.setTimeout(() => {
                 screen.style.backgroundImage = 'url("./images/caseypix/tamagochi_B2_ferret.png';
-        
+
             }, 2000);
         }
-    ferretDance()    
-        
+        ferretDance()
+
         this.hunger += 5
     }
     extra2() {
@@ -289,10 +299,10 @@ class FerretPet extends Cyberpet {
             screen.style.backgroundImage = 'url("./images/caseypix/ferret-ferret-lancer2.gif';
             window.setTimeout(() => {
                 screen.style.backgroundImage = 'url("./images/caseypix/tamagochi_B2_ferret.png';
-        
+
             }, 2000);
         }
-    ferretDig()    
+        ferretDig()
 
     }
 }
@@ -384,33 +394,45 @@ class SealPet extends Cyberpet {
 
     //ASK BUTTON
     extra2() {
-        let askPic = Math.floor(Math.random() * 3)
-        console.log(askPic)
-        switch (askPic) {
-            case 0:
-                screen.style.backgroundImage = 'url("./images/nickpix/lecture01.jpg")';
-                break;
-            case 1:
-                screen.style.backgroundImage = 'url("./images/nickpix/lecture02.jpg")';
-                break;
-            case 2:
-                screen.style.backgroundImage = 'url("./images/nickpix/lecture03.jpg")';
-                break;
-            default:
-                screen.style.backgroundImage = 'url("./images/nickpix/lecture01.jpg")';
+        const askQuestion = () => {
+            let askPic = Math.floor(Math.random() * 3)
+            console.log(askPic)
+            switch (askPic) {
+                case 0:
+                    screen.style.backgroundImage = 'url("./images/nickpix/lecture01.jpg")';
+                    break;
+                case 1:
+                    screen.style.backgroundImage = 'url("./images/nickpix/lecture02.jpg")';
+                    break;
+                case 2:
+                    screen.style.backgroundImage = 'url("./images/nickpix/lecture03.jpg")';
+                    break;
+                default:
+                    screen.style.backgroundImage = 'url("./images/nickpix/lecture01.jpg")';
+            }
+            let i = Math.floor(Math.random() * 50); // CHOOSE A QUOTE
+    
+            leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>Well, hello! I'm a ${chosenName.type}.</p><p id="my-new-name" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>You can call me ${chosenName.name}.</p><p id="age" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>I'm ${chosenName.age} years-old.</p><p>&nbsp;</p><p style='font-family:"Cutive Mono", monospace;font-size: 1em; line-height: 1em; color: #ffffff;'>"Now, here's a thought..."</p><p>&nbsp;</p><p style='font-family:"Cutive Mono", monospace;font-size: 1em; line-height: 1em; color: #ffffff;'>"${quotes[i]}"</p>`  
+
+
+            window.setTimeout(() => {
+                leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>Well, hello! I'm a ${chosenName.type}.</p><p id="my-new-name" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>You can call me ${chosenName.name}.</p><p id="age" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>I'm ${chosenName.age} years-old.</p>`
+                screen.style.backgroundImage = chosenName.pic1; //CHANGE TO THE START SCREEN FOR CHOSEN PET  
+                
+
+            }, 8000); // 8 SECONDS TO READ THE TEXT
         }
-        let i =Math.floor(Math.random() * 50); // CHOOSE A QUOTE
-       
-        leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Open Sans";font-size: 1em; line-height: 0.4em; color: #ffffff;'>type: ${chosenName.type}</p><p id="my-new-name" class="my-text" style='font-family:"Open Sans";font-size: 1em; line-height: 0.4em; color: #ffffff;'>name: ${chosenName.name}</p><p id="age" class="my-text" style='font-family:"Open Sans";font-size: 1em; line-height: 0.4em; color: #ffffff;'>age: ${chosenName.age}</p><p style='font-family:"Cutive Mono", monospace;font-size: 1em; line-height: 1em; color: #ffffff;'>"${quotes[i]}"</p>`
+        askQuestion()
+        
     }
 }
 
 
 //each constant has 8 entries: Type, name, age, happiness, cleanliness, hunger, thirst, FOUR picture spaces,plus two extra
-const CaseyPet = new FerretPet("Ferret", "", 10, 50, 50, 50, 50, 'url("./images/caseypix/tamagochi_B2_ferret.png', '', 'url("./images/caseypix/ferretwriggle2.gif', '', 50, 50)
-const MatthewPet = new DogPet("dog", "", "23", 50, 50, 50, 50, '', '', '', '', 30, 80)
-const AdamPet = new Cyberpet("cat", "", "27", 50, 50, 55, 52, '', '', '', '', 50, 64)
-const ShinaPet = new Cyberpet("mouse", "", "32", 50, 50, 50, 50, '', '', '', '', 50, 50)
+const CaseyPet = new FerretPet("ferret", "", 10, 50, 50, 50, 50, 'url("./images/caseypix/tamagochi_B2_ferret.png")', '', 'url("./images/caseypix/ferretwriggle2.gif', '', 50, 50)
+const MatthewPet = new DogPet("troll", "", 23, 50, 50, 50, 50, 'url("./images/console/700pxh/troll1.png")', '', '', '', 30, 80)
+const AdamPet = new Cyberpet("monkey", "", 27, 50, 50, 55, 52, 'url("./images/console/700pxh/monkey1.png")', '', '', '', 50, 64)
+const ShinaPet = new Cyberpet("snail", "", 32, 50, 50, 50, 50, 'url("./images/console/700pxh/snail1.png")', '', '', '', 50, 50)
 const NickPet = new SealPet("seal", "", 580, 50, 50, 50, 50, 'url("./images/nickpix/seal_start.jpg")', 'url("./images/nickpix/seal-swimming.jpg")', '', '', 50, 50)
 
 //We use the petArray below as a means of capturing the pet in each of the buttons (caseypet, matthewpet, etc...)
@@ -418,9 +440,9 @@ let petArray = [CaseyPet, MatthewPet, AdamPet, ShinaPet, NickPet]
 
 //renderData() is initailly called when choosing a pet and then each time that you press one of the yellow buttons. 
 const renderData = () => {
-    type.textContent = `type: ${chosenName.type}`;
-    myNewName.textContent = `name: ${chosenName.name}`;
-    age.textContent = `age: ${chosenName.age}`;
+    type.textContent = `Well, hello! I'm a ${chosenName.type}.`;
+    myNewName.textContent = `You can call me ${chosenName.name}.`;
+    age.textContent = `I'm ${chosenName.age} years-old!`;
     happiness.textContent = `happiness: ${chosenName.happiness}`;
     cleanliness.textContent = `cleanliness: ${chosenName.cleanliness}`
     hunger.textContent = `hunger: ${chosenName.hunger}`
@@ -433,49 +455,37 @@ const renderData = () => {
 // IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 caseyButton.addEventListener("click", () => {
 
-    //NEW CODE 18 JAN 2023
-    //GET THE CORRECT NAME
-    chosenName = petArray[4]
 
+    //GET THE CORRECT NAME
+    chosenName = petArray[0]
     //RUN THE NAME FUNCTION
     gimmeName()
 
-        //CHANGE BACKGROUND
-    // document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/paper.jpg");background-size:cover;');
-    document.querySelector("body").setAttribute('style', 'background-color: #3B2615');
+    //CHANGE BACKGROUND
+    document.querySelector("body").setAttribute('style', 'background-color: #4d2885');
 
     //PUT BACKGROUNDS ON BUTTONS
     const buttonStyle =
-    caseyButton.setAttribute('style', 'background-color:#87542A; color: white;')
-    matthewButton.setAttribute('style', 'background-color:#87542A; color: white;')
-    adamButton.setAttribute('style', 'background-color:#87542A; color: white;')
-    nickButton.setAttribute('style', 'background-color:#87542A; color: white;')
-    shinaButton.setAttribute('style', 'background-color:#87542A; color: white;')
+        caseyButton.setAttribute('style', 'background-color:#6236a5; color: white;')
+    matthewButton.setAttribute('style', 'background-color:#6236a5; color: white;')
+    adamButton.setAttribute('style', 'background-color:#6236a5; color: white;')
+    nickButton.setAttribute('style', 'background-color:#6236a5; color: white;')
+    shinaButton.setAttribute('style', 'background-color:#6236a5; color: white;')
 
     //SHOW LEFT AND RIGHT SIDE
     leftside.setAttribute('style', 'display: "block"; line-height: 1em;')
     rightside.setAttribute('style', 'display: "block";border:0px')
 
-    //FONTS ON LEFT SIDE
-    type.setAttribute('style', 'font-family:"Open Sans";font-size: 1.4em; line-height: 0.8em');
-    myNewName.setAttribute('style', 'font-family:"Open Sans";font-size: 1.4em; line-height: 0.8em');
-    age.setAttribute('style', 'font-family:"Open Sans";font-size: 1.4em; line-height: 0.8em');
-
-
-    //NEW CODE END
-    a2.src = "./Images/console/700pxh/tamagochi_A2_casey.png"; //Name on top of console
+    a2.src = "./images/console/700pxh/tamagochi_A2_casey.png"; //Name on top of console
     c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_unlit.png"; //put name on wriggle button
     c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_unlit.png"  //put name on dig button
-    // document.getElementById("screen").setAttribute('style', 'background-color:#38873a');
 
-    // b2.src = "./images/ferret_1.png"
     chosenName = petArray[0]
     CaseyPet.addCasey();// new code
     scoreName5 = 'wriggle';
     scoreName6 = 'dig';
     stats.style.display = 'block'; // SHOW THE STATS
-    // type.style.color = 'red';
-    // type.style.fontFamily = 'monospace'
+
     renderData();
 })
 
@@ -483,10 +493,32 @@ caseyButton.addEventListener("click", () => {
 // IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 matthewButton.addEventListener("click", () => {
     chosenName = petArray[1]
+    //RUN THE NAME FUNCTION
+    gimmeName()
+
+    //CHANGE BACKGROUND
+    document.querySelector("body").setAttribute('style', 'background-color: #6e1f28');
+
+    //PUT BACKGROUNDS ON BUTTONS
+    const buttonStyle =
+        caseyButton.setAttribute('style', 'background-color:#570f17; color: white;')
+    matthewButton.setAttribute('style', 'background-color:#570f17; color: white;')
+    adamButton.setAttribute('style', 'background-color:#570f17; color: white;')
+    nickButton.setAttribute('style', 'background-color:#570f17; color: white;')
+    shinaButton.setAttribute('style', 'background-color:#570f17; color: white;')
+
+    //SHOW LEFT AND RIGHT SIDE
+    leftside.setAttribute('style', 'display: "block"; line-height: 1em;')
+    rightside.setAttribute('style', 'display: "block";border:0px')
+
+
     a2.src = "./Images/console/700pxh/tamagochi_A2_matthew.png"; //Name on top 
+    c4_extra1.src = "./images/console/700pxh/tamagochi_C4_growl_unlit.png"; //put name on growl button
+    c5_extra2.src = "./images/console/700pxh/tamagochi_C5_stomp_unlit.png"  //put name on stomp button
+
     MatthewPet.addMatthew(); // Casey's code!!!! Yay!
-    scoreName5 = 'panting'
-    scoreName6 = 'dribbling'
+    scoreName5 = 'growling'
+    scoreName6 = 'stomping'
     stats.style.display = 'block'; // SHOW THE STATS
     renderData();
 })
@@ -495,25 +527,58 @@ matthewButton.addEventListener("click", () => {
 // IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
 adamButton.addEventListener("click", () => {
     chosenName = petArray[2]
+    type.style.display = 'none';
+    screen.style.backgroundImage = 'url("./images/console/700pxh/monkey1.png")'
+    //CHANGE BACKGROUND
+    document.querySelector("body").setAttribute('style', 'background-color: #dec225');
+
+    //PUT BACKGROUNDS ON BUTTONS
+    const buttonStyle =
+    caseyButton.setAttribute('style', 'background-color:#de9f25; color: white;')
+    matthewButton.setAttribute('style', 'background-color:#de9f25; color: white;')
+    adamButton.setAttribute('style', 'background-color:#de9f25; color: white;')
+    nickButton.setAttribute('style', 'background-color:#de9f25; color: white;')
+    shinaButton.setAttribute('style', 'background-color:#de9f25; color: white;')
+
+    //SHOW LEFT AND RIGHT SIDE
+    leftside.setAttribute('style', 'display: "block"; line-height: 1em;')
+    rightside.setAttribute('style', 'display: "block";border:0px')
+
     a2.src = "./Images/console/700pxh/tamagochi_A2_adam.png"; //Name on top 
-    AdamPet.addAdam(); // Casey's code!!!! Yay!
-    scoreName5 = ''
-    scoreName6 = ''
+    // AdamPet.addAdam(); // Casey's code!!!! Yay!
+    scoreName5 = 'climb'
+    scoreName6 = 'scratch'
     stats.style.display = 'block'; // SHOW THE STATS
-    renderData();
+    // renderData();
 })
 
 //SHINA BUTTON
 // IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
-// shinaButton.addEventListener("click", () => {
-//     chosenName = petArray[3]
-//     // a2.src = ""; //Name on top 
-//     ShinaPet.addShina(); // Casey's code!!!! Yay!
-//     scoreName5 = ''
-//     scoreName6 = ''
-// stats.style.display = 'block'; // SHOW THE STATS
-//     renderData();
-// })
+shinaButton.addEventListener("click", () => {
+    chosenName = petArray[3]
+    type.style.display = 'none';
+    screen.style.backgroundImage = 'url("./images/console/700pxh/snail1.png")'
+    //CHANGE BACKGROUND
+    document.querySelector("body").setAttribute('style', 'background-color: #2e3591');
+
+    //PUT BACKGROUNDS ON BUTTONS
+    const buttonStyle =
+    caseyButton.setAttribute('style', 'background-color:#3e48c0; color: white;')
+    matthewButton.setAttribute('style', 'background-color:#3e48c0; color: white;')
+    adamButton.setAttribute('style', 'background-color:#3e48c0; color: white;')
+    nickButton.setAttribute('style', 'background-color:#3e48c0; color: white;')
+    shinaButton.setAttribute('style', 'background-color:#3e48c0; color: white;')
+
+    //SHOW LEFT AND RIGHT SIDE
+    leftside.setAttribute('style', 'display: "block"; line-height: 1em;')
+    rightside.setAttribute('style', 'display: "block";border:0px')
+    // a2.src = ""; //Name on top 
+    ShinaPet.addShina(); // Casey's code!!!! Yay!
+    scoreName5 = ''
+    scoreName6 = ''
+stats.style.display = 'block'; // SHOW THE STATS
+    // renderData();
+})
 
 // NICK BUTTON
 // IMAGE SIZE FOR PICTURES IS 352px WIDE by 220px HIGH
@@ -543,12 +608,11 @@ nickButton.addEventListener("click", () => {
 
     //SHOW LEFT AND RIGHT SIDE
     leftside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; line-height: 1em;')
-    rightside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; text-align: center')
+    rightside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; text-align: center;')
 
     //FONTS ON LEFT SIDE
-    type.setAttribute('style', 'font-family:"Open Sans";font-size: 1em; line-height: 0.4em');
-    myNewName.setAttribute('style', 'font-family:"Open Sans";font-size: 1em; line-height: 0.4em');
-    age.setAttribute('style', 'font-family:"Open Sans";font-size: 1em; line-height: 0.4em');
+    myNewName.setAttribute('style', 'visibility:hidden;');
+    age.setAttribute('style', 'visibility:hidden;');
 
     //PLACE NAME IMAGE AT TOP OF CONSOLE
     a2.src = "./Images/console/700pxh/tamagochi_A2_nick.png"; //Name on top 
@@ -569,6 +633,7 @@ nickButton.addEventListener("click", () => {
     NickPet.addNick(); // Casey's code!!!! Yay!
     scoreName5 = 'dive'
     scoreName6 = 'ask'
+
 
     //RENDER THE DATA
     renderData();
@@ -617,6 +682,8 @@ d3_button2.addEventListener("mouseup", () => {
 d4_button3.addEventListener("mouseenter", () => {
     if (chosenName == petArray[0]) {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_lit.png"
+    } else if (chosenName == petArray[1]) {
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_growl_lit.png"
     } else if (chosenName == petArray[4]) {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_dive_lit.png"
     } else {
@@ -626,6 +693,9 @@ d4_button3.addEventListener("mouseenter", () => {
 d4_button3.addEventListener("mouseleave", () => {
     if (chosenName == petArray[0]) {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_unlit.png"
+        d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
+    } else if (chosenName == petArray[1]) {
+        c4_extra1.src = "./images/console/700pxh/tamagochi_C4_growl_unlit.png"
         d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
     } else if (chosenName == petArray[4]) {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_dive_unlit.png"
@@ -650,6 +720,8 @@ d4_button3.addEventListener("mouseup", () => { //NO CHANGE NECESSARY HERE
 d5_button4.addEventListener("mouseenter", () => {
     if (chosenName == petArray[0]) {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_lit.png"
+    } else if (chosenName == petArray[1]) {
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_stomp_lit.png"
     } else if (chosenName == petArray[4]) {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_ask_lit.png"
     } else {
@@ -660,6 +732,9 @@ d5_button4.addEventListener("mouseenter", () => {
 d5_button4.addEventListener("mouseleave", () => {
     if (chosenName == petArray[0]) {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_unlit.png"
+        d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
+    } else if (chosenName == petArray[1]) {
+        c5_extra2.src = "./images/console/700pxh/tamagochi_C5_stomp_unlit.png"
         d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
     } else if (chosenName == petArray[4]) {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_ask_unlit.png"

@@ -175,7 +175,9 @@ const splash = document.getElementById("splash")
 const nickGameOver = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>That's it!</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>GAME OVER!</p>`
 
 const whoAmI = () => {
-    leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>Well, hello! I'm a ${chosenName.type}.</p><p id="my-new-name" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>You can call me ${chosenName.name}.</p><p id="age" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>I'm ${chosenName.age} years-old.</p>`
+    // leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>Well, hello! I'm a ${chosenName.type}.</p><p id="my-new-name" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>You can call me ${chosenName.name}.</p><p id="age" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>I'm ${chosenName.age} years-old.</p><p>I'm really fond of fish.</p>`
+    leftside.innerHTML = `<div id = "new-leftside"><p>Well, hello! I'm a ${chosenName.type}.</p><p>You can call me ${chosenName.name}.</p><p>I'm ${chosenName.age} years-old.</p><p>I'm really fond of fish.</p><p>I like diving,</p><p>it keeps me clean.</p><p>And ask me to say</p><p>something....</p><p>...I like to talk!</p></div>`
+    console.log("that worked")
     // screen.style.backgroundImage = chosenName.pic1; //CHANGE TO THE START SCREEN FOR CHOSEN PET  
     };
 
@@ -191,27 +193,31 @@ function checkState() {
         }, 2000);
 leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>HELP!</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>NEED FISH</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>MUST DIVE</p>`
     }
-
-    if (chosenName.happiness >= 100) {
-        chosenName.happiness = 100;
-    }
-    if  (chosenName.cleanliness >= 100) {
-        chosenName.cleanliness = 100
-    }
-    if (chosenName.thirst >= 100) {
-        chosenName.thirst = 100;
-    }
-    if (chosenName.happiness <= 40) {
-        // image.src = "./images/pikaPunk.jpg"
-    }
-    if (chosenName.happiness <= 30 || chosenName.hunger <= 10 || chosenName.thirst <= 5 || chosenName.cleanliness <= 30) {
-        screen.style.backgroundImage = chosenName.pic3; // SICK SEAL PIC
-    }
-
-    if (chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0) {
+    if (chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0) {
         leftside.innerHTML = nickGameOver;
         screen.style.backgroundImage = chosenName.pic4; // DEAD SEAL PIC
-    }
+        checkState(); //puts checkState into a loop
+    };
+    if (chosenName.happiness >= 100) {
+        chosenName.happiness = 100;
+    };
+    if  (chosenName.cleanliness >= 100) {
+        chosenName.cleanliness = 100
+    };
+    if (chosenName.thirst >= 100) {
+        chosenName.thirst = 100;
+    };
+    if (chosenName.hunger >= 100) {
+        chosenName.hunger = 100;
+    };
+    if (chosenName.happiness <= 20 || chosenName.hunger <= 20 || chosenName.thirst <= 20 || chosenName.cleanliness <= 20) {
+        screen.style.backgroundImage = chosenName.pic3; // SICK SEAL PIC
+    };
+
+    // if (chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0) {
+    //     leftside.innerHTML = nickGameOver;
+    //     screen.style.backgroundImage = chosenName.pic4; // DEAD SEAL PIC
+    // };
 
     if (chosenName.hunger <= 0) {
         chosenName.hunger = 0
@@ -221,9 +227,8 @@ leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Gro
     };
     if (chosenName.thirst <= 0) {
         chosenName.thirst = 0
-    // } else if (chosenName.health <= 0) {
-    //     chosenName.health = 0;
     };
+
     if (chosenName.cleanliness <= 0) {
         chosenName.cleanliness = 0;
     };
@@ -234,14 +239,14 @@ leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Gro
 //SET THE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
 const timingFunction = () => {
     window.setTimeout(() => {
-        chosenName.happiness -= Math.floor(Math.random() * 3);
-        chosenName.cleanliness -= Math.floor(Math.random() * 2);
-        chosenName.hunger -= Math.floor(Math.random() * 2);
-        chosenName.thirst -= Math.floor(Math.random() * 2);
+        chosenName.happiness -= Math.floor(Math.random() * 5);
+        chosenName.cleanliness -= Math.floor(Math.random() * 5);
+        chosenName.hunger -= Math.floor(Math.random() * 5);
+        chosenName.thirst -= Math.floor(Math.random() * 5);
         checkState();
         renderData();
         timingFunction();
-    }, 2000);
+    }, 1500);
 }
 
 //SET THE AGE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
@@ -251,7 +256,7 @@ const timingFunctionAge = () => {
         // checkState();
         // renderData();
         timingFunctionAge();
-    }, 16000); //AGE WILL INCREASE BY 1 YEAR EVERY 16 SECONDS - WE DON'T USE THE RENDER DATA IN HERE AS IT IS COINCIDES WITH EVERY 4th PASS OF timingFunction()
+    }, 12000); //AGE WILL INCREASE BY 1 YEAR EVERY 16 SECONDS - WE DON'T USE THE RENDER DATA IN HERE AS IT IS COINCIDES WITH EVERY 4th PASS OF timingFunction()
 }
 
 
@@ -328,7 +333,7 @@ class FerretPet extends Cyberpet {
     }
     giveFood() {
         // con
-        this.hunger += 5;
+        this.hunger += 6;
         this.cleanliness += 3;
         // pro
         this.happiness += 5;
@@ -402,8 +407,8 @@ class SealPet extends Cyberpet {
         fishpix.pop()
         formatArray()
         // con
-        this.hunger += Math.floor(Math.random() * 4);
-        this.cleanliness += Math.floor(Math.random() * 3);
+        this.hunger += Math.floor(Math.random() * 7);
+        this.cleanliness -= Math.floor(Math.random() * 2);
         // pro
         this.happiness += Math.floor(Math.random() * 3);
     }
@@ -453,8 +458,8 @@ class SealPet extends Cyberpet {
             // console.log(time);
             fishpix.push("./images/nickpix/fish_100px.png");
             formatArray()
-            this.happiness += 3;
-            this.cleanliness += 3;
+            this.happiness += 5;
+            this.cleanliness += 8;
             happiness.textContent = `happiness: ${chosenName.happiness}`;
             cleanliness.textContent = `cleanliness: ${chosenName.cleanliness}`;
 
@@ -650,7 +655,7 @@ shinaButton.addEventListener("click", () => {
     ShinaPet.addShina(); // Casey's code!!!! Yay!
     scoreName5 = ''
     scoreName6 = ''
-stats.style.display = 'block'; // SHOW THE STATS
+    stats.style.display = 'block'; // SHOW THE STATS
     // renderData();
 })
 
@@ -704,7 +709,7 @@ nickButton.addEventListener("click", () => {
     c5_extra2.src = "./images/console/700pxh/tamagochi_C5_ask_unlit.png";
 
     // paras.classList.add('my-new-text')
-    NickPet.addNick(); // Casey's code!!!! Yay!
+    // NickPet.addNick(); // Casey's code!!!! Yay!
     scoreName5 = 'dive'
     scoreName6 = 'ask'
 

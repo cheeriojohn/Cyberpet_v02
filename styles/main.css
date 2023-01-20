@@ -113,6 +113,13 @@ button {
   font-size: 1.5em;
 }
 
+#new-leftside {
+  margin-left: 10px;
+  font-family: 'Irish Grover', cursive;
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
 #image-container {
   width: auto;
   padding: 0px 25px;

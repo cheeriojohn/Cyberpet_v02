@@ -54,6 +54,8 @@ const myNewName = document.getElementById("my-new-name");
 myNewName.style.visibility = 'hidden'; //HIDE THIS TEXT TILL AFTER THE PET HAS BEEN GIVEN A NAME
 const age = document.getElementById("age");
 age.style.visibility = 'hidden'; //HIDE THIS TEXT TILL AFTER THE PET HAS BEEN GIVEN A NAME
+const extraInfo = document.getElementById("extra-info"); //EXTRA DIV IN LEFTSIDE FOR ADDITIONAL INFO
+extraInfo.style.visibility = 'hidden'; //HIDE THIS DIV UNTIL CALLED BY gimmeName()
 
 //SCORES - THESE IDENTIFY WHERE THE TEXT APPEARS IN THE HTML
 const happiness = document.getElementById("happiness") //SCORE No.1
@@ -164,6 +166,10 @@ let fishpix = [
     "./images/nickpix/fish_100px.png",
     "./images/nickpix/fish_100px.png",
     "./images/nickpix/fish_100px.png",
+    "./images/nickpix/fish_100px.png",
+    "./images/nickpix/fish_100px.png",
+    "./images/nickpix/fish_100px.png",
+    "./images/nickpix/fish_100px.png",
     "./images/nickpix/fish_100px.png"
 ]
 const formatArray = () => {
@@ -173,6 +179,26 @@ const formatArray = () => {
 const splash = document.getElementById("splash")
 
 const nickGameOver = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>That's it!</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>GAME OVER!</p>`
+const nickGameOver1 = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>That's it!</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: #b70505;text-align: center; line-height: 1.2em;'>GAME OVER!</p>`
+const nickGameOver2 = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: black;text-align: center; line-height: 1.2em;'>That's it!</p><p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 2.5em; color: black;text-align: center; line-height: 1.2em;'>GAME OVER!</p>`
+
+const nickGameOverFn = () => {
+    window.setTimeout(() => {
+        leftside.innerHTML = nickGameOver2;
+        d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_unlit.png"
+        d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_unlit.png"
+        d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
+        d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
+        screen.style.backgroundImage = chosenName.pic4; // DEAD SEAL PIC
+    }, 200);
+    leftside.innerHTML = nickGameOver1;
+    d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_unlit.png"
+    d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_unlit.png"
+    d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
+    d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
+    screen.style.backgroundImage = chosenName.pic4; // DEAD SEAL PIC
+    nickGameOverFn();
+}
 
 const whoAmI = () => {
     // leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>Well, hello! I'm a ${chosenName.type}.</p><p id="my-new-name" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>You can call me ${chosenName.name}.</p><p id="age" class="my-text" style='font-family:"Irish Grover", cursive;font-size: 1.5em; color: #ffffff;'>I'm ${chosenName.age} years-old.</p><p>I'm really fond of fish.</p>`
@@ -184,8 +210,11 @@ const whoAmI = () => {
 function checkState() {
     // console.log(chosenName.hunger)
     if(fishpix.length == 0) {
-        leftside.innerHTML = nickGameOver;
+        nickGameOverFn();
+        // leftside.innerHTML = nickGameOver;
         screen.style.backgroundImage = chosenName.pic4; // DEAD SEAL PIC
+
+        checkState();
     } else if(fishpix.length <= 2) {
         window.setTimeout(() => {
         whoAmI();
@@ -209,6 +238,9 @@ leftside.innerHTML = `<p id="type" class="my-text" style='font-family:"Irish Gro
     };
     if (chosenName.hunger >= 100) {
         chosenName.hunger = 100;
+    };
+    if (chosenName.happiness > 20 || chosenName.hunger > 20 || chosenName.thirst > 20 || chosenName.cleanliness > 20) {
+        screen.style.backgroundImage = chosenName.pic1; // HAPPY SEAL PIC
     };
     if (chosenName.happiness <= 20 || chosenName.hunger <= 20 || chosenName.thirst <= 20 || chosenName.cleanliness <= 20) {
         screen.style.backgroundImage = chosenName.pic3; // SICK SEAL PIC
@@ -246,7 +278,7 @@ const timingFunction = () => {
         checkState();
         renderData();
         timingFunction();
-    }, 1500);
+    }, 1800);
 }
 
 //SET THE AGE TIMER GOING - THESE VALUES ARE TRUE FOR ALL PETS
@@ -256,7 +288,7 @@ const timingFunctionAge = () => {
         // checkState();
         // renderData();
         timingFunctionAge();
-    }, 12000); //AGE WILL INCREASE BY 1 YEAR EVERY 16 SECONDS - WE DON'T USE THE RENDER DATA IN HERE AS IT IS COINCIDES WITH EVERY 4th PASS OF timingFunction()
+    }, 22000); //AGE WILL INCREASE BY 1 YEAR EVERY 16 SECONDS - WE DON'T USE THE RENDER DATA IN HERE AS IT IS COINCIDES WITH EVERY 4th PASS OF timingFunction()
 }
 
 
@@ -283,6 +315,9 @@ nameButtonSubmit.addEventListener("click", () => {
 
     timingFunction(); //STARTS THE TIMER THAT CHANGES THE HAPPINESS, CLEANLINESS, HUNGER AND THIRST STATS ON A REGULAR BASIS
     timingFunctionAge(); //STARTS THE TIMER THAT CHANGES THE AGE STATS ON A REGULAR BASIS
+    if(chosenName.type == "seal") {
+        extraInfo.setAttribute('style', 'display: block;');
+    }
 
 })
 
@@ -393,7 +428,7 @@ class DogPet extends Cyberpet {
 }
 
 class SealPet extends Cyberpet {
-    constructor(type, name, age, happiness, cleanliness, hunger, thirst, pic1, pic2, pic3, pic4, dive, ask) {
+    constructor(type, name, age, happiness, cleanliness, hunger, thirst, pic1, pic2, pic3, pic4, dive, ask, extraInf) {
         super(type, name, age, happiness, cleanliness, hunger, thirst, pic1, pic2, pic3, pic4)
         this.score5 = dive //we use a 'score5' in the 'this.' part to call the unique characteristic/activity
         this.score6 = ask //we use 'score6' in the 'this.' part to call the unique characteristic/activity
@@ -512,7 +547,7 @@ const CaseyPet = new FerretPet("ferret", "", 10, 50, 50, 50, 50, 'url("./images/
 const MatthewPet = new DogPet("troll", "", 23, 50, 50, 50, 50, 'url("./images/console/700pxh/troll1.png")', '', '', '', 30, 80)
 const AdamPet = new Cyberpet("monkey", "", 27, 50, 50, 55, 52, 'url("./images/console/700pxh/monkey1.png")', '', '', '', 50, 64)
 const ShinaPet = new Cyberpet("snail", "", 32, 50, 50, 50, 50, 'url("./images/console/700pxh/snail1.png")', '', '', '', 50, 50)
-const NickPet = new SealPet("seal", "", 580, 50, 50, 50, 50, 'url("./images/nickpix/seal_start.jpg")', 'url("./images/nickpix/seal-swimming.jpg")', 'url("./images/nickpix/sick-seal.png")', 'url("./images/nickpix/dead-seal.jpg")', 0, 0)
+const NickPet = new SealPet("seal", "", 580, 50, 50, 50, 50, 'url("./images/nickpix/seal_start.jpg")', 'url("./images/nickpix/seal-swimming.jpg")', 'url("./images/nickpix/sick-seal.png")', 'url("./images/nickpix/dead-seal.jpg")', 0, 0,'')
 
 //We use the petArray below as a means of capturing the pet in each of the buttons (caseypet, matthewpet, etc...)
 let petArray = [CaseyPet, MatthewPet, AdamPet, ShinaPet, NickPet]
@@ -669,8 +704,7 @@ nickButton.addEventListener("click", () => {
     //RUN THE NAME FUNCTION
     gimmeName()
 
-    //CHANGE BACKGROUND
-    // document.querySelector("body").setAttribute('style', 'background-image: url("./images/nickpix/paper.jpg");background-size:cover;');
+    //CHANGE BACKGROUND COLOR
     document.querySelector("body").setAttribute('style', 'background-color: #2E84DB');
 
 
@@ -689,9 +723,10 @@ nickButton.addEventListener("click", () => {
     leftside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; line-height: 1em;')
     rightside.setAttribute('style', 'display: "block"; border: solid rgba(137, 123, 112, 1) 1px; border-radius: 25px; background-color: rgba(161, 152, 145, .5); padding: 20px; text-align: center;')
 
-    //FONTS ON LEFT SIDE
+    //HIDE TEXT ON LEFT SIDE UNTIL CALLED BY GIMMENAME
     myNewName.setAttribute('style', 'visibility:hidden;');
     age.setAttribute('style', 'visibility:hidden;');
+    extraInfo.innerHTML = `<div style="margin-left: 10px; font-family: 'Irish Grover', cursive; font-size: 1.5em; color: #ffffff;"><p>I'm really fond of fish.</p><p>I like diving,</p><p>it keeps me clean.</p><p>And ask me to say</p><p>something....</p><p>...I like to talk!</p></div>`
 
     //PLACE NAME IMAGE AT TOP OF CONSOLE
     a2.src = "./Images/console/700pxh/tamagochi_A2_nick.png"; //Name on top 
@@ -722,43 +757,78 @@ nickButton.addEventListener("click", () => {
 
 // MUNCH BUTTON
 d2_button1.addEventListener("mouseenter", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     c2_munch.src = "./images/console/700pxh/tamagochi_C2_munch_lit.png"
+    }
 })
 d2_button1.addEventListener("mouseleave", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     c2_munch.src = "./images/console/700pxh/tamagochi_C2_munch_unlit.png"
     d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_unlit.png"
+    }
 })
 d2_button1.addEventListener("mousedown", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_lit.png"
 
     chosenName.giveFood();
     checkState();
     // flag = true;
     renderData();
+    }
 })
 d2_button1.addEventListener("mouseup", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d2_button1.src = "./images/console/700pxh/tamagochi_D2_button1_unlit.png"
+    }
 })
 
 //SLURP BUTTON
 d3_button2.addEventListener("mouseenter", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     c3_slurp.src = "./images/console/700pxh/tamagochi_C3_slurp_lit.png"
+    }
 })
 d3_button2.addEventListener("mouseleave", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     c3_slurp.src = "./images/console/700pxh/tamagochi_C3_slurp_unlit.png"
     d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_unlit.png"
+    }
 })
 d3_button2.addEventListener("mousedown", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_lit.png"
     chosenName.giveDrink()
     renderData();
+    }
 })
 d3_button2.addEventListener("mouseup", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d3_button2.src = "./images/console/700pxh/tamagochi_D3_button2_unlit.png"
+    }
 })
 
 //EXTRA1 BUTTON - WE NEED TO USE IF/ELSE TO GIVE THE CORRECT MOUSEOVER PIX
 d4_button3.addEventListener("mouseenter", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     if (chosenName == petArray[0]) {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_lit.png"
     } else if (chosenName == petArray[1]) {
@@ -768,8 +838,12 @@ d4_button3.addEventListener("mouseenter", () => {
     } else {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_extra1_lit.png"
     }
+}
 })
 d4_button3.addEventListener("mouseleave", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     if (chosenName == petArray[0]) {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_wriggle_unlit.png"
         d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
@@ -784,19 +858,31 @@ d4_button3.addEventListener("mouseleave", () => {
         c4_extra1.src = "./images/console/700pxh/tamagochi_C4_extra1_unlit.png"
         d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
     }
+}
 })
 d4_button3.addEventListener("mousedown", () => { //NO CHANGE NECESSARY HERE
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_lit.png"
     chosenName.extra1();
     renderData();
+    }
 })
 d4_button3.addEventListener("mouseup", () => { //NO CHANGE NECESSARY HERE
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d4_button3.src = "./images/console/700pxh/tamagochi_D4_button3_unlit.png"
+    }
 })
 
 
 //EXTRA2 BUTTON - WE NEED TO USE IF/ELSE TO GIVE THE CORRECT MOUSEOVER PIX
 d5_button4.addEventListener("mouseenter", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     if (chosenName == petArray[0]) {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_lit.png"
     } else if (chosenName == petArray[1]) {
@@ -806,9 +892,13 @@ d5_button4.addEventListener("mouseenter", () => {
     } else {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_extra2_lit.png"
     }
+}
 })
 
 d5_button4.addEventListener("mouseleave", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     if (chosenName == petArray[0]) {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_dig_unlit.png"
         d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
@@ -823,15 +913,24 @@ d5_button4.addEventListener("mouseleave", () => {
         c5_extra2.src = "./images/console/700pxh/tamagochi_C5_extra2_unlit.png"
         d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
     }
+}
 })
 
 d5_button4.addEventListener("mousedown", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_lit.png"
     chosenName.extra2();
     renderData();
+    }
 })
 d5_button4.addEventListener("mouseup", () => {
+    if (fishpix.length == 0 || chosenName.hunger <= 0 || chosenName.thirst <= 0 || chosenName.cleanliness <= 0 || chosenName.happiness <= 0){
+        checkState();
+    } else {
     d5_button4.src = "./images/console/700pxh/tamagochi_D5_button4_unlit.png"
+    }
 })
 
 
